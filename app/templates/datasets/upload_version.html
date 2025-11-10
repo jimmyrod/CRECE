@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Subir versión - {{ dataset.title }}{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-7">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h2 class="h4">Subir nueva versión</h2>
+        <form method="post" enctype="multipart/form-data">
+          {{ version_form.hidden_tag() }}
+          <div class="mb-3">
+            {{ version_form.version_label.label(class='form-label') }}
+            {{ version_form.version_label(class='form-control') }}
+          </div>
+          <div class="mb-3">
+            {{ version_form.file.label(class='form-label') }}
+            {{ version_form.file(class='form-control') }}
+          </div>
+          <div class="mb-3">
+            {{ version_form.file_format.label(class='form-label') }}
+            {{ version_form.file_format(class='form-select') }}
+          </div>
+          <div class="mb-3">
+            {{ version_form.change_log.label(class='form-label') }}
+            {{ version_form.change_log(class='form-control', rows=3) }}
+          </div>
+          <button type="submit" name="submit_version" class="btn btn-primary">Guardar versión</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="h5">Documentación adicional</h2>
+        <form method="post" enctype="multipart/form-data">
+          {{ doc_form.hidden_tag() }}
+          <div class="mb-3">
+            {{ doc_form.file_label.label(class='form-label') }}
+            {{ doc_form.file_label(class='form-control') }}
+          </div>
+          <div class="mb-3">
+            {{ doc_form.file_format.label(class='form-label') }}
+            {{ doc_form.file_format(class='form-select') }}
+          </div>
+          <div class="mb-3">
+            {{ doc_form.file.label(class='form-label') }}
+            {{ doc_form.file(class='form-control') }}
+          </div>
+          <button type="submit" name="submit_doc" class="btn btn-outline-secondary">Subir archivo</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
