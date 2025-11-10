@@ -40,8 +40,21 @@ La aplicación lee las variables desde el entorno del servidor (puedes cargarlas
 
 ## Creación de cuentas
 
-1. Regístrate desde `/register`. Las cuentas quedan en estado `pending` hasta que un administrador las active manualmente desde la base de datos (`UPDATE users SET status='active' WHERE email='correo@dominio';`).
-2. Crea el usuario administrador insertando un registro con `role='administrator'` directamente en la tabla `users` o actualizando un usuario existente.
+1. Regístrate desde `/register`. Las cuentas quedan en estado `pending` hasta que un administrador las revise en el panel.
+2. Ingresa con la cuenta administrativa creada por defecto al importar `db/schema_mysql.sql`:
+
+   | Rol | Correo | Contraseña |
+   | --- | --- | --- |
+   | Administrador | `admin@crece.ecuadorcrececontigo.org` | `CreceAdmin2024!` |
+
+   > **Importante:** cambia la contraseña en tu primer inicio de sesión. Puedes generar un nuevo hash con `php -r "echo password_hash('nueva', PASSWORD_BCRYPT);"` y actualizarlo en la base (`UPDATE users SET password_hash='<hash>' WHERE email='admin@crece.ecuadorcrececontigo.org';`) o desarrollar un formulario interno para realizar el cambio.
+
+3. Desde el panel de administración podrás aprobar o rechazar nuevos usuarios, asignarles un rol (investigador interno/externo, revisor) y activar o suspender cuentas según corresponda.
+
+## Panel administrativo
+
+- `/admin/users`: listado de registros pendientes con controles para aprobar/rechazar y un historial de los últimos cambios.
+- `/admin/requests`: bandeja para evaluar las solicitudes de descarga de datasets. Al aprobar una solicitud se registrará el acuerdo de uso y se habilitan las descargas para el solicitante.
 
 ## Despliegue en cPanel (PHP)
 

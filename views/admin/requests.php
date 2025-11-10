@@ -5,6 +5,7 @@
             <h1 class="h3 mb-0">Solicitudes de acceso</h1>
             <p class="text-muted mb-0">Gestiona las peticiones de investigadores externos.</p>
         </div>
+        <a class="btn btn-outline-secondary" href="<?= htmlspecialchars(\App\Support\Url::to('admin/users')) ?>">Gestionar usuarios</a>
     </div>
     <div class="card">
         <div class="table-responsive">

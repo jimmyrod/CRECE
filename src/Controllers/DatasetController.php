@@ -44,13 +44,13 @@ class DatasetController
 
     public function createForm(): void
     {
-        Auth::requireRole(['administrator', 'internal_researcher']);
+        Auth::requireRole(['administrator']);
         Response::view('datasets/create');
     }
 
     public function store(): void
     {
-        Auth::requireRole(['administrator', 'internal_researcher']);
+        Auth::requireRole(['administrator']);
         $user = Auth::user();
         $title = trim($_POST['title'] ?? '');
         $summary = trim($_POST['summary'] ?? '');
@@ -89,7 +89,7 @@ class DatasetController
         }
 
         $user = Auth::user();
-        if (!$user || !in_array($user['role'], ['administrator', 'internal_researcher'], true)) {
+        if (!$user || !in_array($user['role'], ['administrator'], true)) {
             Session::flash('error', 'No tienes permisos para subir versiones.');
             Response::redirect('/dataset/' . $slug);
             return;
@@ -107,7 +107,7 @@ class DatasetController
         }
 
         $user = Auth::user();
-        if (!$user || !in_array($user['role'], ['administrator', 'internal_researcher'], true)) {
+        if (!$user || !in_array($user['role'], ['administrator'], true)) {
             Session::flash('error', 'No tienes permisos para subir versiones.');
             Response::redirect('/dataset/' . $slug);
             return;

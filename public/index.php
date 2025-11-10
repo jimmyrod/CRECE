@@ -69,7 +69,7 @@ $datasetController = new DatasetController(
     new DownloadLogRepository(),
     new FileStorageService()
 );
-$adminController = new AdminController(new AccessRequestRepository());
+$adminController = new AdminController(new AccessRequestRepository(), new UserRepository());
 
 $router->get('/', [$datasetController, 'index']);
 
@@ -90,6 +90,8 @@ $router->get('/download/{id}', [$datasetController, 'download']);
 $router->get('/admin/requests', [$adminController, 'dashboard']);
 $router->get('/admin/requests/{id}', [$adminController, 'review']);
 $router->post('/admin/requests/{id}', [$adminController, 'update']);
+$router->get('/admin/users', [$adminController, 'users']);
+$router->post('/admin/users/{id}', [$adminController, 'updateUser']);
 
 $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 $router->dispatch($_SERVER['REQUEST_METHOD'] ?? 'GET', rtrim($path, '/') ?: '/');

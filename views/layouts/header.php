@@ -26,11 +26,14 @@ $error = Session::flash('error');
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <?php if ($user): ?>
                     <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars(Url::to('/')) ?>">Datasets</a></li>
-                    <?php if (in_array($user['role'], ['administrator', 'internal_researcher'], true)): ?>
+                    <?php if ($user['role'] === 'administrator'): ?>
                         <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars(Url::to('datasets/create')) ?>">Nuevo dataset</a></li>
                     <?php endif; ?>
                     <?php if (in_array($user['role'], ['administrator', 'reviewer'], true)): ?>
                         <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars(Url::to('admin/requests')) ?>">Solicitudes</a></li>
+                    <?php endif; ?>
+                    <?php if ($user['role'] === 'administrator'): ?>
+                        <li class="nav-item"><a class="nav-link" href="<?= htmlspecialchars(Url::to('admin/users')) ?>">Usuarios</a></li>
                     <?php endif; ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

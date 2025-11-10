@@ -174,6 +174,20 @@ CREATE TABLE api_tokens (
         ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- Administrative seed user
+INSERT INTO users (first_name, last_name, email, password_hash, institution, country, role, status)
+VALUES (
+    'Admin',
+    'Fundación',
+    'admin@crece.ecuadorcrececontigo.org',
+    '$2y$12$4OeqhjEMqxZiM9JquJlteeO/yZHK0AM9S/uR06orqq5vuIRq8acj2',
+    'Fundación Ecuador Crece Contigo',
+    'Ecuador',
+    'administrator',
+    'active'
+)
+ON DUPLICATE KEY UPDATE email = VALUES(email);
+
 -- Optional seed data for notification templates
 INSERT INTO notification_templates (code, subject, body, locale)
 VALUES
