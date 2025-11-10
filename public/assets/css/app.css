@@ -1,0 +1,18 @@
+body {
+    background-color: #f7f7f7;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+.card {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+}
+
+footer {
+    background: #002642;
+    color: #ffffff;
+    padding: 2rem 0;
+}
