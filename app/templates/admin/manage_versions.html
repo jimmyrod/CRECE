@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Versiones - {{ dataset.title }}{% endblock %}
+{% block content %}
+<a href="{{ url_for('admin.dashboard') }}" class="btn btn-link">&larr; Volver</a>
+<div class="card shadow-sm mt-3">
+  <div class="card-body">
+    <h1 class="h4">Versiones del dataset</h1>
+    <ul class="list-group list-group-flush">
+      {% for version in versions %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ version.version_label }}</strong>
+          <div class="small text-muted">{{ version.file_name }} · {{ version.uploaded_at.strftime('%d/%m/%Y') }}</div>
+        </div>
+        <a class="btn btn-outline-primary btn-sm" href="{{ url_for('datasets.download_version', version_id=version.id) }}">Descargar</a>
+      </li>
+      {% else %}
+      <li class="list-group-item">No hay versiones registradas.</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
