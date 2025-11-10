@@ -33,7 +33,7 @@ Aplicación web escrita en PHP 8 que permite a la Fundación administrar su cat�
 
 La aplicación lee las variables desde el entorno del servidor (puedes cargarlas mediante `.env` usando tu manejador favorito o configurándolas en cPanel):
 
-- `APP_URL`: URL pública del portal (por ejemplo, `https://ecuadorcrececontigo.org/crece`).
+- `APP_URL`: URL pública del portal (por ejemplo, `https://crece.ecuadorcrececontigo.org`).
 - `APP_TIMEZONE`: zona horaria PHP (por defecto `America/Guayaquil`).
 - `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`: credenciales MySQL.
 - `MAIL_FROM_ADDRESS`, `MAIL_FROM_NAME`: datos básicos del remitente utilizados al integrar un servicio de correo en el futuro.
@@ -46,11 +46,11 @@ La aplicación lee las variables desde el entorno del servidor (puedes cargarlas
 ## Despliegue en cPanel (PHP)
 
 1. Sube el código al hosting (Git, FTP o administrador de archivos).
-2. Si tu panel permite definir el directorio raíz del sitio, apunta a `public/`. Si trabajas dentro de un subdirectorio (por ejemplo `public_html/crece`), deja la raíz en `crece/` y conserva el `.htaccess` incluido, que se encarga de redirigir todo hacia `public/index.php` y expone los activos desde `assets/`.
+2. Si tu panel permite definir el directorio raíz del sitio, apunta a `public/`. Si trabajas dentro de un subdirectorio (por ejemplo `public_html/crece`), conserva el `.htaccess` incluido, que se encarga de redirigir todo hacia `public/index.php` y expone los activos desde `assets/`.
 3. Crea la base de datos `crece_portal`, asigna el usuario `creceportaluser` con su contraseña y ejecuta `db/schema_mysql.sql` desde phpMyAdmin o la terminal.
 4. En la sección **Setup Python/Setup Node.js** no es necesario configurar nada; basta con PHP.
 5. En **Configuración de PHP** → **Variables de entorno** define `APP_URL`, `DB_HOST`, `DB_DATABASE`, `DB_USERNAME` y `DB_PASSWORD`.
-   - Si publicas el portal en `https://ecuadorcrececontigo.org/crece/`, usa exactamente esa URL (sin barra final) para `APP_URL` y confirma que `RewriteBase` en `.htaccess` coincide con `/crece/`.
+   - Si publicas el portal en `https://crece.ecuadorcrececontigo.org/`, usa exactamente esa URL (sin barra final) para `APP_URL` y confirma que `RewriteBase` en `.htaccess` se mantiene como `/`.
 6. Asegúrate de que el directorio `storage/uploads` tenga permisos de escritura (755 o 775 según tu proveedor).
 
 ## Estructura destacada

@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteBase /crece/
+    RewriteBase /
 
     RewriteRule ^assets/(.*)$ public/assets/$1 [L]
 
