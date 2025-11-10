@@ -12,6 +12,7 @@ use App\Repositories\DatasetRepository;
 use App\Repositories\DownloadLogRepository;
 use App\Repositories\UserRepository;
 use App\Services\FileStorageService;
+use App\Support\Response;
 
 session_start();
 
@@ -92,6 +93,9 @@ $router->get('/admin/requests/{id}', [$adminController, 'review']);
 $router->post('/admin/requests/{id}', [$adminController, 'update']);
 $router->get('/admin/users', [$adminController, 'users']);
 $router->post('/admin/users/{id}', [$adminController, 'updateUser']);
+$router->get('/admin/users/{id}', function (): void {
+    Response::redirect('/admin/users');
+});
 
 $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 $router->dispatch($_SERVER['REQUEST_METHOD'] ?? 'GET', rtrim($path, '/') ?: '/');
