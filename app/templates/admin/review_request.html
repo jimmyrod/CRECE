@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Revisión de solicitud{% endblock %}
+{% block content %}
+<a href="{{ url_for('admin.dashboard') }}" class="btn btn-link">&larr; Volver</a>
+<div class="row mt-3">
+  <div class="col-lg-7">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h1 class="h4 mb-3">Solicitud de acceso</h1>
+        <p><strong>Dataset:</strong> {{ access_request.dataset.title }}</p>
+        <p><strong>Solicitante:</strong> {{ access_request.requester.full_name }} ({{ access_request.requester.email }})</p>
+        <p><strong>Institución:</strong> {{ access_request.institution or 'No especificada' }}</p>
+        <p><strong>Uso previsto:</strong></p>
+        <p>{{ access_request.intended_use }}</p>
+        {% if access_request.methodology %}
+        <p><strong>Metodología:</strong></p>
+        <p>{{ access_request.methodology }}</p>
+        {% endif %}
+        {% if access_request.expected_publication %}
+        <p><strong>Resultados esperados:</strong></p>
+        <p>{{ access_request.expected_publication }}</p>
+        {% endif %}
+        {% if access_request.safeguards %}
+        <p><strong>Salvaguardas:</strong></p>
+        <p>{{ access_request.safeguards }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-5">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="h5">Registrar decisión</h2>
+        <form method="post">
+          {{ form.hidden_tag() }}
+          <div class="mb-3">
+            {{ form.decision.label(class='form-label') }}
+            {{ form.decision(class='form-select') }}
+          </div>
+          <div class="mb-3">
+            {{ form.decision_notes.label(class='form-label') }}
+            {{ form.decision_notes(class='form-control', rows=3) }}
+          </div>
+          <button class="btn btn-primary" type="submit">Guardar decisión</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
