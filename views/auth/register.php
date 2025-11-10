@@ -3,7 +3,7 @@
     <div class="card shadow-sm">
         <div class="card-body p-4">
             <h2 class="h4 mb-3">Crear cuenta de investigador</h2>
-            <form method="post" action="/register">
+            <form method="post" action="<?= htmlspecialchars(\App\Support\Url::to('register')) ?>">
                 <div class="row g-3">
                     <div class="col-md-6">
                         <label for="first_name" class="form-label">Nombre</label>

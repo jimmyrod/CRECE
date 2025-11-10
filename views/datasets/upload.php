@@ -3,7 +3,7 @@
     <h1 class="h3 mb-4">Subir nueva versión</h1>
     <div class="card">
         <div class="card-body">
-            <form method="post" action="/dataset/<?= htmlspecialchars($dataset['slug']) ?>/upload" enctype="multipart/form-data">
+            <form method="post" action="<?= htmlspecialchars(\App\Support\Url::to('dataset/' . rawurlencode($dataset['slug']) . '/upload')) ?>" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label class="form-label" for="version_label">Nombre de la versión</label>
                     <input type="text" class="form-control" id="version_label" name="version_label" value="v<?= date('Ym') ?>" required>
@@ -27,7 +27,7 @@
                     <textarea class="form-control" id="change_log" name="change_log" rows="3"></textarea>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <a href="/dataset/<?= htmlspecialchars($dataset['slug']) ?>" class="btn btn-outline-secondary me-2">Cancelar</a>
+                    <a href="<?= htmlspecialchars(\App\Support\Url::to('dataset/' . rawurlencode($dataset['slug']))) ?>" class="btn btn-outline-secondary me-2">Cancelar</a>
                     <button type="submit" class="btn btn-primary">Subir versión</button>
                 </div>
             </form>

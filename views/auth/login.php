@@ -3,7 +3,7 @@
     <div class="card shadow-sm">
         <div class="card-body p-4">
             <h2 class="h4 mb-3">Iniciar sesión</h2>
-            <form method="post" action="/login">
+            <form method="post" action="<?= htmlspecialchars(\App\Support\Url::to('login')) ?>">
                 <div class="mb-3">
                     <label for="email" class="form-label">Correo electrónico</label>
                     <input type="email" name="email" id="email" class="form-control" required>
@@ -16,7 +16,7 @@
                     <button type="submit" class="btn btn-primary">Ingresar</button>
                 </div>
             </form>
-            <p class="mt-3 mb-0">¿No tienes cuenta? <a href="/register">Regístrate aquí</a>.</p>
+            <p class="mt-3 mb-0">¿No tienes cuenta? <a href="<?= htmlspecialchars(\App\Support\Url::to('register')) ?>">Regístrate aquí</a>.</p>
         </div>
     </div>
 </div>

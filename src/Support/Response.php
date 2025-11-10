@@ -8,7 +8,7 @@ class Response
 {
     public static function redirect(string $path): void
     {
-        header('Location: ' . $path);
+        header('Location: ' . Url::to($path));
         exit;
     }
 

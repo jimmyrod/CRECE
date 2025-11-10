@@ -27,7 +27,7 @@
                         <td><?= htmlspecialchars($request['first_name'] . ' ' . $request['last_name']) ?></td>
                         <td><span class="badge bg-warning text-dark"><?= htmlspecialchars($request['status']) ?></span></td>
                         <td><?= htmlspecialchars(date('d/m/Y', strtotime($request['submitted_at']))) ?></td>
-                        <td class="text-end"><a class="btn btn-sm btn-outline-primary" href="/admin/requests/<?= (int) $request['id'] ?>">Revisar</a></td>
+                        <td class="text-end"><a class="btn btn-sm btn-outline-primary" href="<?= htmlspecialchars(\App\Support\Url::to('admin/requests/' . (int) $request['id'])) ?>">Revisar</a></td>
                     </tr>
                 <?php endforeach; ?>
                 <?php if (!$requests): ?>

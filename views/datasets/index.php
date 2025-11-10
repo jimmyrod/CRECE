@@ -6,7 +6,7 @@
             <p class="text-muted mb-0">Explora las investigaciones disponibles en la Fundación.</p>
         </div>
         <?php if ($user && in_array($user['role'], ['administrator', 'internal_researcher'], true)): ?>
-            <a class="btn btn-primary" href="/datasets/create">Registrar nuevo dataset</a>
+            <a class="btn btn-primary" href="<?= htmlspecialchars(\App\Support\Url::to('datasets/create')) ?>">Registrar nuevo dataset</a>
         <?php endif; ?>
     </div>
     <div class="row g-3">
@@ -15,7 +15,7 @@
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column">
                         <h2 class="h5">
-                            <a href="/dataset/<?= htmlspecialchars($dataset['slug']) ?>" class="text-decoration-none">
+                            <a href="<?= htmlspecialchars(\App\Support\Url::to('dataset/' . rawurlencode($dataset['slug']))) ?>" class="text-decoration-none">
                                 <?= htmlspecialchars($dataset['title']) ?>
                             </a>
                         </h2>

@@ -49,7 +49,7 @@ class Auth
     {
         $user = self::user();
         if (!$user || !in_array($user['role'], $roles, true)) {
-            Response::redirect('/login');
+            Response::redirect('login');
         }
     }
 }

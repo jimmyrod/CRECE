@@ -2,7 +2,7 @@
 <div class="container py-4" style="max-width: 900px;">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/admin/requests">Solicitudes</a></li>
+            <li class="breadcrumb-item"><a href="<?= htmlspecialchars(\App\Support\Url::to('admin/requests')) ?>">Solicitudes</a></li>
             <li class="breadcrumb-item active" aria-current="page">Revisión #<?= (int) $request['id'] ?></li>
         </ol>
     </nav>
@@ -31,7 +31,7 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <form method="post" action="/admin/requests/<?= (int) $request['id'] ?>">
+            <form method="post" action="<?= htmlspecialchars(\App\Support\Url::to('admin/requests/' . (int) $request['id'])) ?>">
                 <div class="mb-3">
                     <label class="form-label" for="status">Decisión</label>
                     <select class="form-select" id="status" name="status" required>
@@ -45,7 +45,7 @@
                     <textarea class="form-control" id="decision_notes" name="decision_notes" rows="3"></textarea>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <a href="/admin/requests" class="btn btn-outline-secondary me-2">Cancelar</a>
+                    <a href="<?= htmlspecialchars(\App\Support\Url::to('admin/requests')) ?>" class="btn btn-outline-secondary me-2">Cancelar</a>
                     <button type="submit" class="btn btn-success">Guardar decisión</button>
                 </div>
             </form>

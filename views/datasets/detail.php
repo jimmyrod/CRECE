@@ -2,7 +2,7 @@
 <div class="container py-4">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="<?= htmlspecialchars(\App\Support\Url::to('/')) ?>">Inicio</a></li>
             <li class="breadcrumb-item active" aria-current="page"><?= htmlspecialchars($dataset['title']) ?></li>
         </ol>
     </nav>
@@ -49,7 +49,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h2 class="h5 mb-0">Versiones disponibles</h2>
                         <?php if ($user && in_array($user['role'], ['administrator', 'internal_researcher'], true)): ?>
-                            <a class="btn btn-sm btn-outline-primary" href="/dataset/<?= htmlspecialchars($dataset['slug']) ?>/upload">Subir nueva versión</a>
+                            <a class="btn btn-sm btn-outline-primary" href="<?= htmlspecialchars(\App\Support\Url::to('dataset/' . rawurlencode($dataset['slug']) . '/upload')) ?>">Subir nueva versión</a>
                         <?php endif; ?>
                     </div>
                     <div class="list-group">
@@ -64,9 +64,9 @@
                                 </div>
                                 <div class="text-end">
                                     <?php if ($user): ?>
-                                        <a class="btn btn-primary btn-sm" href="/download/<?= (int) $version['id'] ?>">Descargar</a>
+                                        <a class="btn btn-primary btn-sm" href="<?= htmlspecialchars(\App\Support\Url::to('download/' . (int) $version['id'])) ?>">Descargar</a>
                                     <?php else: ?>
-                                        <a class="btn btn-outline-secondary btn-sm" href="/login">Inicia sesión</a>
+                                        <a class="btn btn-outline-secondary btn-sm" href="<?= htmlspecialchars(\App\Support\Url::to('login')) ?>">Inicia sesión</a>
                                     <?php endif; ?>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
                     <h2 class="h5">Solicitar acceso</h2>
                     <p class="text-muted">Cuéntanos cómo utilizarás la información para que podamos evaluar tu solicitud.</p>
                     <?php if ($user): ?>
-                        <form method="post" action="/dataset/<?= htmlspecialchars($dataset['slug']) ?>/request">
+                        <form method="post" action="<?= htmlspecialchars(\App\Support\Url::to('dataset/' . rawurlencode($dataset['slug']) . '/request')) ?>">
                             <div class="mb-3">
                                 <label class="form-label" for="intended_use">Uso previsto *</label>
                                 <textarea class="form-control" id="intended_use" name="intended_use" rows="3" required></textarea>
@@ -104,7 +104,7 @@
                             <button type="submit" class="btn btn-success w-100">Enviar solicitud</button>
                         </form>
                     <?php else: ?>
-                        <a class="btn btn-outline-primary w-100" href="/login">Inicia sesión para solicitar acceso</a>
+                        <a class="btn btn-outline-primary w-100" href="<?= htmlspecialchars(\App\Support\Url::to('login')) ?>">Inicia sesión para solicitar acceso</a>
                     <?php endif; ?>
                 </div>
             </div>

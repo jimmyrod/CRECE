@@ -1,7 +1,7 @@
 <?php include __DIR__ . '/../layouts/header.php'; ?>
 <div class="container py-4" style="max-width: 900px;">
     <h1 class="h3 mb-4">Registrar nuevo dataset</h1>
-    <form method="post" action="/datasets">
+    <form method="post" action="<?= htmlspecialchars(\App\Support\Url::to('datasets')) ?>">
         <div class="card mb-3">
             <div class="card-body">
                 <div class="row g-3">
@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="d-flex justify-content-end">
-            <a href="/" class="btn btn-outline-secondary me-2">Cancelar</a>
+            <a href="<?= htmlspecialchars(\App\Support\Url::to('/')) ?>" class="btn btn-outline-secondary me-2">Cancelar</a>
             <button type="submit" class="btn btn-primary">Guardar dataset</button>
         </div>
     </form>
