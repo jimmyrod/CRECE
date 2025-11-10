@@ -1,0 +1,15 @@
+body {
+  background-color: #f6f7fb;
+}
+
+main.container {
+  min-height: 70vh;
+}
+
+.card-dataset {
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.card-dataset:hover {
+  box-shadow: 0 0.75rem 1.5rem rgba(18, 38, 63, 0.15);
+}

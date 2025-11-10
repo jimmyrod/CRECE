@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}{{ dataset.title }} - Detalle del dataset{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h1 class="h3">{{ dataset.title }}</h1>
+        <p class="text-muted">{{ dataset.summary }}</p>
+        <dl class="row">
+          <dt class="col-sm-4">Categoría</dt>
+          <dd class="col-sm-8">{{ dataset.category or 'No especificada' }}</dd>
+          <dt class="col-sm-4">Alcance geográfico</dt>
+          <dd class="col-sm-8">{{ dataset.geographic_scope or 'No especificado' }}</dd>
+          <dt class="col-sm-4">Año de publicación</dt>
+          <dd class="col-sm-8">{{ dataset.publication_year or 'No disponible' }}</dd>
+          <dt class="col-sm-4">Contacto</dt>
+          <dd class="col-sm-8">{{ dataset.contact_name }} {% if dataset.contact_email %}- <a href="mailto:{{ dataset.contact_email }}">{{ dataset.contact_email }}</a>{% endif %}</dd>
+          <dt class="col-sm-4">Restricciones</dt>
+          <dd class="col-sm-8">{{ dataset.legal_restrictions or 'Sin restricciones registradas' }}</dd>
+        </dl>
+      </div>
+    </div>
+    <div class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h2 class="h4">Versiones disponibles</h2>
+        <ul class="list-group list-group-flush">
+          {% for version in dataset.versions|sort(attribute='uploaded_at', reverse=True) %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <strong>{{ version.version_label }}</strong>
+              <div class="text-muted small">{{ version.file_name }} · {{ version.file_format|upper }} · {{ version.uploaded_at.strftime('%d/%m/%Y') }}</div>
+            </div>
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('datasets.download_version', version_id=version.id) }}" class="btn btn-outline-primary btn-sm">Descargar</a>
+            {% else %}
+            <a href="{{ url_for('auth.login', next=request.url) }}" class="btn btn-outline-secondary btn-sm">Inicia sesión</a>
+            {% endif %}
+          </li>
+          {% else %}
+          <li class="list-group-item">Aún no hay versiones cargadas.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="h5">Solicitar acceso</h2>
+        {% if not current_user.is_authenticated %}
+        <p class="text-muted">Debes iniciar sesión para solicitar acceso.</p>
+        <a href="{{ url_for('auth.login', next=request.url) }}" class="btn btn-primary">Iniciar sesión</a>
+        {% else %}
+        <form method="post" action="{{ url_for('datasets.request_access', slug=dataset.slug) }}">
+          {{ request_form.hidden_tag() }}
+          <div class="mb-3">
+            {{ request_form.intended_use.label(class='form-label') }}
+            {{ request_form.intended_use(class='form-control', rows=3) }}
+            {% for error in request_form.intended_use.errors %}
+            <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+          </div>
+          <div class="mb-3">
+            {{ request_form.methodology.label(class='form-label') }}
+            {{ request_form.methodology(class='form-control', rows=3) }}
+          </div>
+          <div class="mb-3">
+            {{ request_form.institution.label(class='form-label') }}
+            {{ request_form.institution(class='form-control') }}
+          </div>
+          <div class="mb-3">
+            {{ request_form.expected_publication.label(class='form-label') }}
+            {{ request_form.expected_publication(class='form-control', rows=3) }}
+          </div>
+          <div class="mb-3">
+            {{ request_form.safeguards.label(class='form-label') }}
+            {{ request_form.safeguards(class='form-control', rows=2) }}
+          </div>
+          <div class="mb-3">
+            {{ request_form.agreement_version.label(class='form-label') }}
+            {{ request_form.agreement_version(class='form-control') }}
+          </div>
+          <button type="submit" class="btn btn-success w-100">Enviar solicitud</button>
+        </form>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

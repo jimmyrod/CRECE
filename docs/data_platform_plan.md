@@ -125,18 +125,36 @@ Para equipos que operarán la plataforma desde un hosting compartido con cPanel,
 
 3. **Importar el esquema**
    - Dentro de cPanel abrir **phpMyAdmin**.
-   - Seleccionar la base de datos creada y usar la pestaña **Importar**.
+   - Seleccionar la base de datos creada (`crece_portal`) y usar la pestaña **Importar**.
    - Cargar el archivo [`db/schema_mysql.sql`](../db/schema_mysql.sql) incluido en este repositorio para crear tablas, llaves foráneas e índices.
 
-4. **Configurar almacenamiento de archivos**
+4. **Configurar variables de entorno de la aplicación**
+   - Ajustar el archivo `.env` (o el mecanismo equivalente del framework elegido) con las credenciales creadas en cPanel.
+   - Un ejemplo de configuración mínima para un backend en PHP/Laravel sería:
+
+     ```env
+     APP_ENV=production
+     APP_URL=https://portal.fundacioncrece.org
+
+     DB_CONNECTION=mysql
+     DB_HOST=127.0.0.1
+     DB_PORT=3306
+     DB_DATABASE=crece_portal
+     DB_USERNAME=creceportaluser
+     DB_PASSWORD=Crece2k!!!
+     ```
+
+   - Confirmar la conexión desde la terminal de cPanel con `mysql -u creceportaluser -p'Crece2k!!!' -h 127.0.0.1 crece_portal` para asegurar que la importación fue exitosa.
+
+5. **Configurar almacenamiento de archivos**
    - Para volúmenes pequeños se puede usar un directorio protegido con `.htaccess` fuera de `public_html` (ej. `~/data_files`).
    - Para un enfoque más robusto, configurar un bucket externo (S3/Wasabi) y guardar en la base de datos únicamente el URI seguro.
 
-5. **Automatizar tareas recurrentes**
+6. **Automatizar tareas recurrentes**
    - Utilizar **Cron Jobs** de cPanel para ejecutar comandos de mantenimiento (ej. `php artisan schedule:run`) cada minuto.
    - Configurar tareas adicionales para limpiar enlaces de descarga expirados y enviar recordatorios pendientes.
 
-6. **Seguridad operativa**
+7. **Seguridad operativa**
    - Forzar HTTPS mediante el gestor de certificados de cPanel.
    - Activar registro detallado de accesos y monitorear el panel de métricas de cPanel para detectar anomalías.
    - Mantener respaldos automáticos de la base de datos (cPanel Backup Wizard o scripts personalizados que exporten el esquema y datos a diario).
