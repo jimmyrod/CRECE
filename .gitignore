@@ -1,0 +1,13 @@
+/vendor/
+/node_modules/
+.env
+.env.local
+storage/uploads/
+/storage/logs/
+.idea/
+.DS_Store
+*.log
+.sass-cache/
+phpunit.xml.cache
+.cache/
+/tmp/
